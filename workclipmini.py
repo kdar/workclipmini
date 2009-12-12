@@ -14,7 +14,10 @@ from twisted.internet import task
 from network import Network
 
 if os.name == 'posix':
-  import linux  as anyos
+  try:
+    import linux as anyos
+  except:
+    import mac as anyos
 if os.name == 'nt':
   import windows as anyos
   

@@ -33,7 +33,8 @@ class Network(DatagramProtocol):
  
   #===============================
   def get_uid(self):
-    self.sha.update('{0}{1}{2}{3}'.format(self.nodename, time.time(), os.getpid(), os.getcwd()))
+    #self.sha.update('{0}{1}{2}{3}'.format(self.nodename, time.time(), os.getpid(), os.getcwd()))
+    self.sha.update('%s%f%d%s' % (self.nodename, time.time(), os.getpid(), os.getcwd()))
     return self.sha.hexdigest()
  
   #===============================
@@ -47,7 +48,8 @@ class Network(DatagramProtocol):
   #===============================
   def send(self, addr, *args):
     if args:
-      self.transport.write('{0}:{1}:{2}:{3}'.format(self.name, self.nodename, self.uid, ' '.join(args)), (addr, self.port))
+      #self.transport.write('{0}:{1}:{2}:{3}'.format(self.name, self.nodename, self.uid, ' '.join(args)), (addr, self.port))
+      self.transport.write('%s:%s:%s:%s' % (self.name, self.nodename, self.uid, ' '.join(args)), (addr, self.port))
 
   #===============================
   def datagramReceived(self, data, address):
