@@ -7,6 +7,7 @@ import os
 import time
 import re
 import webbrowser
+import louie
 
 from twisted.internet import reactor
 from twisted.internet import task
@@ -27,10 +28,9 @@ class WorkclipMini(object):
   def __init__(self):
     self.clipboard = anyos.Clipboard()
     self.hotkey = anyos.Hotkey()
-    self.hotkey.event.connect(self.on_hotkey)
+    louie.connect(self.on_hotkey, self.hotkey.event)
     self.network = Network('192.168.0.255', 45644)
-    self.network.command.connect(self.on_command)
-    
+    louie.connect(self.on_command, self.network.command)
     
     self.hotkey.add_bind('CLIPBOARD', '<control><alt>C')
     self.hotkey.add_bind('URL', '<control><alt>B')    

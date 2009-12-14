@@ -5,8 +5,7 @@ import pyHook
 import win32api
 import time
 import re
-
-from dispatch.dispatcher import Signal
+import louie
 
 #-------------------------------
 class Clipboard(object):
@@ -57,7 +56,7 @@ class Hotkey(object):
     #  bind['truths'] = [False for key in bind['keys']]
     #  bind['final_truths'] = [False for key in bind['keys']]
     
-    self.event = Signal()
+    self.event = louie.Signal()
   
   #===============================
   def add_bind(self, name, string):
@@ -121,7 +120,7 @@ class Hotkey(object):
         bind['truths'] = [False for key in bind['keys']]
         bind['final_truths'] = [False for key in bind['keys']]
         
-        self.event.send(sender=self.__class__, name=bind['name'])
+        louie.send(self.event, sender=self.__class__, name=bind['name'])
     
     return True
     

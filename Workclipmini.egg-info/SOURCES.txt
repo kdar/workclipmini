@@ -1,0 +1,7 @@
+HotKeymodule.c
+setup.py
+Workclipmini.egg-info/PKG-INFO
+Workclipmini.egg-info/SOURCES.txt
+Workclipmini.egg-info/dependency_links.txt
+Workclipmini.egg-info/requires.txt
+Workclipmini.egg-info/top_level.txt

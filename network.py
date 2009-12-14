@@ -4,8 +4,7 @@ import time
 import os
 
 from twisted.internet.protocol import DatagramProtocol
-
-from dispatch.dispatcher import Signal
+import louie
 
 #-------------------------------
 class Network(DatagramProtocol):
@@ -20,7 +19,7 @@ class Network(DatagramProtocol):
     self.name = 'miniworkclip'
     self.uid = self.get_uid()
     
-    self.command = Signal()
+    self.command = louie.Signal()
 
   #===============================
   def startProtocol(self):
@@ -65,7 +64,7 @@ class Network(DatagramProtocol):
         broadcast_packet = True
     
       if not broadcast_packet:
-        self.command.send(sender=self.__class__, data=data, address=address[0], nodename=parts[1], uid=parts[2], command=parts[3])
+        louie.send(self.command, sender=self.__class__, data=data, address=address[0], nodename=parts[1], uid=parts[2], command=parts[3])
     
 
 

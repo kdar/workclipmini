@@ -7,8 +7,7 @@ import Xlib.display
 import Xlib.keysymdef.xkb
 import time
 import re
-
-from dispatch.dispatcher import Signal
+import louie
 
 #-------------------------------
 class Clipboard(object):
@@ -55,7 +54,7 @@ class Hotkey(object):
     
     self.shutdown = False
     
-    self.event = Signal()
+    self.event = louie.Signal()
     
   #===============================
   def _get_apply_masks(self):
@@ -116,7 +115,7 @@ class Hotkey(object):
           #print("key pressed: %d" % event.detail)
           for bind in self.binds:
             if bind['key'] == event.detail:
-              self.event.send(sender=self.__class__, name=bind['name'])
+              louie.send(self.event, sender=self.__class__, name=bind['name'])
               break
     
       time.sleep(0.1)
